@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}student-signup-page{% endblock %} 
+{% block content %}
+<center>
+    <h1 class="mt-4">{{ course.title }}</h1>
+    <p>{{ course.description }}</p>
+
+    <ul>
+        {% for video in videos %}
+        
+            <iframe width="560" height="315" src="{{ video.video_url }}" frameborder="0" allowfullscreen></iframe>
+        
+        {% endfor %}
+    </ul>
+</center>
+{% endblock %}

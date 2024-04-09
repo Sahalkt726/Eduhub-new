@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}contact-page{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container contact ">
+   
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required />
+                </div>
+                <div class="form-group">
+                    <input type="number" id="phone" name="phone" placeholder="Enter your number" required />
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Enter your email"  required />
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message"  placeholder="Enter your message" required></textarea>
+                </div>
+                <input type="submit" value="Submit" />
+            </form>
+            <div class="container-0 p-1">
+                {% for message in messages %}
+                <p class="message-box-success">{{message}}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-6 p-5">
+            <img
+                src="{% static 'images/contact-us.jpg' %}"
+                style="height: 340px; width: 500px; border-radius: 10px;"
+                class="img-fluid"
+                alt=""
+            />
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add-questions-page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        fieldset {
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #016795;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: slategray;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+        
+        /* Style for form fields rendered using {{ form.as_p }} */
+        .form-field {
+            margin-bottom: 10px;
+        }
+
+        .form-field label {
+            font-weight: bold;
+        }
+
+        .form-field input[type="text"],
+        .form-field select {
+            width: calc(100% - 12px); /* Adjust the width to fit inside the form */
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Questions</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+        {{ choice_formset.management_form }}
+        <fieldset>
+            <legend>Choices</legend>
+            {{ choice_formset.management_form }}
+            {% for form in choice_formset %}
+                <div class="form-field">
+                    {{ form.text }}
+                </div>
+                <div class="form-field">
+                    {{ form.is_correct.label_tag }}
+                    {{ form.is_correct }}
+                </div>
+            {% endfor %}
+        </fieldset>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

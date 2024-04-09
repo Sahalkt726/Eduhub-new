@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}about-page{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 p-4 about">
+    <div>
+        <h2>About Us</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6 p-5">
+            <img
+                src="{% static 'images/about-us.jpg' %}"
+                style="height: 330px; width: 500px; border-radius: 20px;"
+                class="img-fluid"
+                alt=""
+            />
+        </div>
+        <div class="col-md-6 p-5">
+            <h1 style="font-weight: bold"><span style="color: #016795; font-weight: bold">EDU</span>HUB</h1>
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, tempore recusandae sit qui
+                consequatur molestias quasi facilis odio, veniam nesciunt laboriosam sed ea perspiciatis mollitia nihil
+                molestiae distinctio modi autem.
+            </p>
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique, tempore recusandae sit qui
+                consequatur molestias quasi facilis odio, veniam nesciunt laboriosam sed ea perspiciatis mollitia nihil
+                molestiae distinctio modi autem.
+            </p>
+            <a href="{% url 'login' %}" class="btn btn-custom-3"
+                >Get Started <span><i class="fa-solid fa-arrow-up-right-from-square"></i></span
+            ></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

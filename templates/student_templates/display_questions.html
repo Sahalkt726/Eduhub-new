@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>evaluate-answer-page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        button[type="submit"] {
+            background-color:#016795;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: slategray;
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Questions</h1></center>
+    <form method="post" action="{% url 'evaluate_answers' %}">
+        {% csrf_token %}
+        {% for question in questions %}
+            <h3>{{ question.text }}</h3>
+            {% for choice in choices %}
+                {% if choice.question == question %}
+                    <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}" id="choice_{{ choice.id }}">
+                    <label for="choice_{{ choice.id }}">{{ choice.text }}</label><br>
+                {% endif %}
+            {% endfor %}
+            <br>
+        {% endfor %}
+        <button type="submit">Submit Answers</button>
+    </form>
+</body>
+</html>

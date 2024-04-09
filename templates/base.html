@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+        
+        <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styless.css' %}">
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+    </head>
+    <body>
+      <div class="hero-section">
+        <nav class="navbar navbar-expand-lg navbar-light p-3 w-100 sticky-top bg-white">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><i class="fa-solid fa-graduation-cap"></i><span> EDU</span>HUB</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>               
+                {% if user.is_authenticated %}
+                {% if user.is_staff %}                
+                <div class="collapse navbar-collapse justify-content-lg-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'staff_dashboard' %}" style="color:#016795;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'notifications' %}">Notifications</a>
+                      </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'manage_courses' %}">ManageCourses</a>
+                      </li>                   
+                       
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'question_list' %}">Tests</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'upload_study_material' %}">StudyMaterial</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'staff_feedback' %}">Feedback</a>
+                </li>
+                    </ul>
+                  </div> 
+                  <div style="margin-right: 20px;">
+                    {% if user.profile_image %}
+                        <a href="{% url 'edit_staff_details' user_id=user.id %}">
+                            <img src="{{ user.profile_image.url }}" alt="Profile Image" class="profile-image">
+                        </a>
+                    {% endif %}
+                    <br>
+                    <span>{{ user.username }}</span>
+                </div>
+            
+                  {% elif user.is_student %}
+                  <div class="collapse navbar-collapse justify-content-lg-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'student_dashboard'%}" style="color:#016795;">Home</a>
+                        </li>  
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'courses' %}">Courses</a>
+                      </li>                
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'student_notification' %}">Notifications</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'display_questions' %}">Tests</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'student_course' %}">EnrolledCourse</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'view_study_materials' %}">StudyMaterial</a>
+                  </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Feedback</a>
+                      </li>
+                  </ul>
+                  </div> 
+                  <div style="margin-right: 20px;">
+                    {% if user.profile_image %}
+                        <a href="{% url 'edit_student_details' user_id=user.id %}">
+                            <img src="{{ user.profile_image.url }}" alt="Profile Image" class="profile-image">
+                        </a>
+                    {% endif %}
+                    <br>
+                    <span>{{ user.username }}</span>
+                </div>
+                  {% endif %}
+                  <a href="{% url 'logout' %}" class="btn btn-custom">Logout</a>
+
+                  {% else %}
+
+                <div class="collapse navbar-collapse justify-content-lg-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="color:#016795;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'courses' %}">Courses</a>
+                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                </ul>
+              </div> 
+              <div class="d-inline-block dropdown">
+                <button class="btn btn-custom dropdown-toggle me-2" type="button" id="signupDropdown" data-bs-toggle="dropdown" aria-expanded="false">Signup</button>
+                <ul class="dropdown-menu mt-1" aria-labelledby="signupDropdown">
+                    <li><a class="dropdown-item" href="{% url 'student_signup' %}">Student</a></li>
+                    <li><a class="dropdown-item" href="{% url 'staff_signup' %}">Staff</a></li>
+                </ul>
+            </div>                  
+            <a href="{% url 'login' %}" class="btn btn-custom" style="margin-left: 10px;">Login</a>
+            {% endif %}
+            </div>
+        </nav>
+    </div>
+
+    
+
+    {% block content %} {% endblock %}
+
+    <footer class="footer-distributed mt-4">
+
+      <div class="footer-left">
+
+        <h3 style="font-weight: bold;"><span style="font-weight: bold;">EDU</span>HUB</h3>
+
+        <p class="footer-links">
+          <a href="{% url 'home' %}" class="link-1">Home</a>
+          
+          <a href="#courses">Courses</a>
+
+          <a href="#about">About</a>
+        
+          <a href="#contact">Contact</a>
+        </p>
+
+        <p class="footer-company-name">EduHub © 2024</p>
+      </div>
+
+      <div class="footer-center">
+
+        <div>
+          <i class="fa fa-map-marker"></i>
+          <p>Kerala, India</p>
+        </div>
+
+        <div>
+          <i class="fa fa-phone"></i>
+          <p>1234567890</p>
+        </div>
+
+        <div>
+          <i class="fa fa-envelope"></i>
+          <p><a href="#">support@EduHub.com</a></p>
+        </div>
+
+      </div>
+
+      <div class="footer-right">
+
+        <p class="footer-company-about">
+          <span>About the eduhub</span>
+          Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        </p>
+
+        <div class="footer-icons">
+
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-github"></i></a>
+
+        </div>
+
+      </div>
+
+    </footer>
+      
+     
+      
+      <!-- Bootstrap JS and dependencies (jQuery and Popper.js) -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+      
+      </body>
+      </html>
+        
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

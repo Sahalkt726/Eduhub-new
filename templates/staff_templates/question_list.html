@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}questions-page{% endblock %} 
+{% block content %}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Choices</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.text }}</td>
+                        <td>
+                            {% for choice in choices %}
+                                {% if choice.question == question %}
+                                    {{ choice.text }} <br>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_question' question.id %}">
+                                <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="add-link">
+            <a href="{% url 'add_question' %}">Add Question</a>
+        </div>
+    </div>
+{% endblock %}

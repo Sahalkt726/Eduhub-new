@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}create-notification-page{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <textarea class="form-control" name="message" rows="8" placeholder="Enter your notification"></textarea>
+        </div>
+        {% if messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <button type="submit" class="btn btn-custom-3">Send Notification</button>
+    </form>
+</div>
+{% endblock %}

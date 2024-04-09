@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}student-dashboard-page{% endblock %} 
+{% block content %}
+<body style="background-color: bisque">
+    <h4 style="color: #fff">
+        <marquee behavior="alternate" direction="right" scrollamount="12" style="background-color: dimgray"
+            >.........WELCOME TO {{user.username}} PAGE.........</marquee
+        >
+    </h4>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card text-white bg-secondary mt-5 ml-2" style="max-width: 18rem">
+                    <div class="card-header"><h3>{{user.username}}</h3></div>
+                    <div class="card-body">
+                        <h1 class="card-title">ID : {{ user.id }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card text-white bg-secondary mt-5 ml-2" style="max-width: 18rem">
+                    <div class="card-header"><h3>Total Staff</h3></div>
+                    <div class="card-body">
+                        <h1 class="card-title">{{ total_staff }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+{% endblock %}

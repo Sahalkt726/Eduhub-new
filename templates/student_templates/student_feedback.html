@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}student-feedback-page{% endblock %} 
+{% block content %}
+
+<h1>Student Feedback</h1>
+<form action="{% url 'student_feedback' staff_id=staff_id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="feedback">Feedback:</label>
+        <textarea class="form-control" id="feedback" name="message" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send Feedback</button>
+</form>
+
+{% endblock %}

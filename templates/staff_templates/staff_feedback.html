@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %}staff-feedback-page{% endblock %} 
+{% block content %}
+
+<h1>Feedback Received</h1>
+    <ul>
+        {% for feedback in feedbacks %}
+        <li>{{ feedback.message }}</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

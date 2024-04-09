@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Study Materials</title>
+</head>
+<body>
+    <h2>My Study Materials</h2>
+    {% if study_materials %}
+        <ul>
+            {% for material in study_materials %}
+                <li>{{ material.title }} - <a href="{{ material.file.url }}">Download</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No study materials uploaded yet.</p>
+    {% endif %}
+</body>
+</html>
